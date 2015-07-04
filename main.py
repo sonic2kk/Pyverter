@@ -232,7 +232,7 @@ class AudioConverter(tkinter.Frame):
 		self.path_to_converter_lib_text = tkinter.StringVar()
 		self.path_to_converter_lib_text.trace('w', self.check_converter_path)
 
-		self.path_to_converter_lib_label = tkinter.Label(self.advanced_tab, text='Path to FFMPEG/AVCONF: ')
+		self.path_to_converter_lib_label = tkinter.Label(self.advanced_tab, text='Path to FFMPEG/avconv: ')
 		self.path_to_converter_lib_textbox = tkinter.Entry(self.advanced_tab, textvariable=self.path_to_converter_lib_text)
 
 		self.converter_theme_var = tkinter.StringVar()
