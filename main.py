@@ -7,6 +7,9 @@ try:
 	import tkinter.ttk
 	import tkinter.colorchooser
 	import tkinter.messagebox
+	import tkinter.filedialog
+
+	import webbrowser
 except ImportError:
 	print('Error: Python 3.X is required. Please upgrade in order to use this converter.')
 
@@ -271,6 +274,24 @@ class AudioConverter(tkinter.Frame):
 		self.conversion_progressbar.pack(pady=10)
 		self.convert_button.pack(pady=20)
 
+		self.menu_bar = tkinter.Menu(self.parent)
+
+		self.file_menu = tkinter.Menu(self.menu_bar, tearoff=0)
+		self.file_menu.add_separator()
+		self.file_menu.add_command(label='Select Input Directory', command=self.select_input_dir)
+		self.file_menu.add_command(label='Select Input File', command=self.select_input_file)
+		self.file_menu.add_command(label='Select Output Directory', command=self.select_output_dir)
+
+		self.help_menu = tkinter.Menu(self.menu_bar, tearoff=0)
+		self.help_menu.add_separator()
+		self.help_menu.add_command(label='Help', command=self.help)
+		self.help_menu.add_command(label='About Pyverter', command=self.about_pyverter)
+
+		self.menu_bar.add_cascade(label='File', menu=self.file_menu)
+		self.menu_bar.add_cascade(label='Help', menu=self.help_menu)
+
+		self.parent.config(menu=self.menu_bar)
+
 		self.center_window()
 
 
@@ -532,6 +553,29 @@ class AudioConverter(tkinter.Frame):
 
 			self.path_to_converter_lib_label.config(fg=self.dir_found_colour)
 			self.convert_button.config(state='normal')
+
+
+	def select_input_dir(self):
+		self.input_dir_text.set(tkinter.filedialog.askdirectory(initialdir=str(os.path.expanduser('~'))))
+
+
+	def select_input_file(self):
+		self.input_dir_text.set(tkinter.filedialog.askopenfilename(initialdir=str(os.path.expanduser('~'))))
+
+
+	def select_output_dir(self):
+		self.output_dir_text.set(tkinter.filedialog.askdirectory(initialdir=str(os.path.expanduser('~'))))
+
+
+	def about_pyverter(self):
+		label = tkinter.Label(text='Pyverter: The Free, Open Source, Cross Platform Audio Converter\n\nWritten in: Python 3\nLibraries used: PyDub, Tkinter\nWritten By: Eamonn Rea\n\nMany thanks to the creators of the libraries used and the Python foundation.\n\nNote: This audio converter requires Python 3, PyDub, and either FFMPEG or AVCONV.\n\nGitHub: http://www.github.com/sonic2kk/Pyverter\nMy Website: http://sonic2kk.pythonanywhere.com/')
+
+		# label.bind('<Button-1>', webbrowser.open_new('http://github.com/sonic2kk/Pyverter'))
+
+		tkinter.messagebox.showinfo(parent=self.parent, title='Test', message=label.cget('text'))
+
+	def help(self):
+		tkinter.messagebox.showinfo(parent=self.parent, title='Help', message='Pyverter allows you to convert a single file, or an entire directory, with ease. You can edit the metadata of multiple songs, or just set it individually.\n\nTo enter the file path, you can either type it in manually in the input directory textbox, or you can go to File -> Select Input File.\nTo select the input directory, you can also enter it in the input directory textbox, or you can go to File -> Select Input Directory. The export file name will automatically be entered as the name of the file. If you wish to edit it, simply change the text in the box. If this box is left blank, the converter will use the name of the file by default anyway.\nTo select the output directory, you can enter it in the output directory textbox, or you can go to File -> Select Output Directory. If you enter a file name in the output directory, the converter will also set the export file name as the name entered and remove the extension automatically. Note that this does not work for converting directories.\n\nThanks for using!')
 
 
 if __name__ == '__main__':
