@@ -336,6 +336,9 @@ class AudioConverter(tkinter.Frame):
 
 						song.export(os.path.join(outputdir, basefile + '.' + self.dropdown_option.get()), format=self.dropdown_option.get(), bitrate=br, tags=metadata)
 
+						if self.delete_original_files_num.get() is 1:
+							os.remove(inputdir)
+
 						self.progress_value.set(self.progress_value.get() + 1)
 					else:
 						if os.path.exists(os.path.join(outputdir, basefile + '.' + self.dropdown_option.get())):
@@ -347,6 +350,9 @@ class AudioConverter(tkinter.Frame):
 
 
 						song.export(os.path.join(outputdir, fn + '.' + self.dropdown_option.get()), format=self.dropdown_option.get(), bitrate=br, tags=metadata)
+
+						if self.delete_original_files_num.get() is 1:
+							os.remove(inputdir)
 
 						self.progress_value.set(self.progress_value.get() + 1)
 				# Converting a directory
@@ -376,6 +382,9 @@ class AudioConverter(tkinter.Frame):
 								continue
 
 						song.export(os.path.join(outputdir, f + '.' + self.dropdown_option.get()), format=self.dropdown_option.get(), bitrate=br, tags=metadata)
+
+						if self.delete_original_files_num.get() is 1:
+							os.remove(os.path.join(str(inputdir), str(file)))
 
 						self.progress_value.set(self.progress_value.get() + 1)
 
