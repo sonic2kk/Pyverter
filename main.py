@@ -49,7 +49,7 @@ class AudioConverter(tkinter.Frame):
 		self.window_width = self.parent.winfo_screenwidth()
 		self.window_height = self.parent.winfo_screenheight()
 
-		self.extensions = ['mp3', 'ogg', 'wav', 'aac', 'flac', 'flv']
+		self.extensions = ['mp3', 'ogg', 'wav', 'aac', 'flac', 'flv', 'webm']
 		self.themes = ['default', 'classic', 'clam', 'alt']
 
 		self.default_dir_found_colour = 'green'
